@@ -25,7 +25,7 @@ A RESTful backend service built with Go to manage users and calculate their age 
 ---
 
 ## 📂 Project Structure
-
+```
 go-users-api/
 ├── cmd/
 │ └── server/
@@ -71,9 +71,9 @@ go-users-api/
 ├── go.mod
 ├── go.sum
 └── sqlc.yaml
+```
 
 yaml
-Copy code
 
 ---
 
@@ -87,19 +87,18 @@ CREATE TABLE users (
 );
 ⚙️ Setup Instructions
 1️⃣ Clone the repository
-bash
-Copy code
+
 git clone <your-repo-url>
 cd go-users-api
 2️⃣ Create PostgreSQL database
 sql
-Copy code
+
 CREATE DATABASE users_db;
 3️⃣ Create .env file
 Create a .env file in the project root:
 
 env
-Copy code
+
 DATABASE_URL=postgres://postgres:password@localhost:5432/users_db?sslmode=disable
 Update username, password, and database as per your setup.
 
@@ -107,7 +106,7 @@ Update username, password, and database as per your setup.
 Execute the migration SQL:
 
 sql
-Copy code
+
 CREATE TABLE users (
   id BIGSERIAL PRIMARY KEY,
   name TEXT NOT NULL,
@@ -116,22 +115,21 @@ CREATE TABLE users (
 (You can also use a migration tool if configured.)
 
 5️⃣ Run the application
-bash
-Copy code
+
 go mod tidy
 go run ./cmd/server
 🌐 Server
 The server starts at:
 
 arduino
-Copy code
+
 http://localhost:8080
 🔗 API Endpoints
 ➕ Create User
 POST /users
 
 json
-Copy code
+
 {
   "name": "Alice",
   "dob": "1990-05-10"
@@ -146,7 +144,7 @@ GET /users
 PUT /users/{id}
 
 json
-Copy code
+
 {
   "name": "Alice Updated",
   "dob": "1991-03-15"
@@ -174,22 +172,5 @@ Clean architecture principles
 
 Real-world REST API patterns
 
-markdown
-Copy code
-
 ---
 
-### ✅ Why this README is good
-- Clean Markdown
-- Professional structure
-- Easy to read in VS Code
-- GitHub-ready
-- Interview/project-submission ready
-
-If you want next:
-- Add **API response examples**
-- Add **curl commands**
-- Add **Docker setup**
-- Polish this for **portfolio / GitHub**
-
-Just say the word 🚀
