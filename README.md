@@ -173,4 +173,7 @@ Clean architecture principles
 Real-world REST API patterns
 
 ---
-
+```
+![alt text](image.png)
+![alt text](image-1.png)
+```
