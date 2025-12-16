@@ -193,5 +193,3 @@ If you want next:
 - Polish this for **portfolio / GitHub**
 
 Just say the word 🚀
-![alt text](image-1.png)
-![alt text](image.png)
