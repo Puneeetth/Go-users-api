@@ -1,179 +1,131 @@
-# Go Users API
+# Go Users API & React Frontend
 
-A RESTful backend service built with Go to manage users and calculate their age dynamically based on their date of birth.
+A full-stack application for managing users / calculating age, featuring a high-performance Go backend and a modern React + TypeScript frontend.
+
+![Dashboard](image.png)
+![Users List](image-1.png)
 
 ---
 
 ## 🚀 Tech Stack
 
-- Go (Golang)
-- GoFiber
-- PostgreSQL
-- SQLC
-- go-playground/validator
+### Backend
+- **Language**: Go (Golang)
+- **Framework**: GoFiber (v2)
+- **Database**: PostgreSQL
+- **ORM/Query Builder**: SQLC (Type-safe SQL)
+- **Documentation**: Swagger via `swaggo`
+
+### Frontend
+- **Framework**: React 18 + Vite
+- **Language**: TypeScript
+- **Styling**: TailwindCSS v3 (Clean, responsive UI)
+- **Icons**: Lucide React
+- **HTTP Client**: Axios
 
 ---
 
 ## ✨ Features
 
-- Create, update, and delete users
-- Fetch user by ID with dynamically calculated age
-- List all users
-- Type-safe database access using SQLC
-- Clean layered architecture (handler, service, repository)
+- **Full CRUD**: Create, Read, Update, Delete users.
+- **Dynamic Calculation**: Age is calculated on-the-fly based on Date of Birth.
+- **Clean Architecture**: Backend organized into Handler, Service, and Repository layers.
+- **Modern UI**:
+    - Dark Mode toggle 🌙
+    - Glassmorphism effects
+    - Smooth animations and transitions
+    - Mobile-responsive design
+    - Interactive toast notifications
 
 ---
 
-## 📂 Project Structure
+## 🛠️ Project Structure
+
 ```
 go-users-api/
-├── cmd/
-│ └── server/
-│ └── main.go
-│
-├── config/
-│ └── config.go
-│
-├── db/
-│ ├── migrations/
-│ │ └── 001_create_users.sql
-│ │
-│ └── sqlc/
-│ ├── db.go
-│ ├── models.go
-│ └── queries.sql.go
-│
-├── internal/
-│ ├── handler/
-│ │ └── user_handler.go
-│ │
-│ ├── service/
-│ │ └── user_service.go
-│ │
-│ ├── repository/
-│ │ └── user_repository.go
-│ │
-│ ├── routes/
-│ │ └── user_routes.go
-│ │
-│ ├── middleware/
-│ │ ├── request_id.go
-│ │ └── logger.go
-│ │
-│ ├── models/
-│ │ └── user.go
-│ │
-│ └── logger/
-│ └── zap.go
-│
-├── reasoning.md
-├── README.md
-├── go.mod
-├── go.sum
-└── sqlc.yaml
+├── cmd/server/         # Backend entry point
+├── config/             # Database configuration
+├── db/                 # SQLC queries and migrations
+├── frontend/           # React frontend application
+│   ├── src/
+│   │   ├── components/ # Reusable UI components
+│   │   ├── pages/      # Application pages
+│   │   ├── services/   # API integration
+│   │   └── types/      # TypeScript definitions
+├── internal/           # Core backend logic (Handlers, Services, Repos)
+└── README.md           # Project documentation
 ```
-
-yaml
 
 ---
 
-## 🗄️ Database Schema
+## ⚙️ Setup Instructions
 
-```sql
-CREATE TABLE users (
-  id BIGSERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
-  dob DATE NOT NULL
-);
-⚙️ Setup Instructions
-1️⃣ Clone the repository
+### Prerequisites
+- Go 1.20+
+- Node.js 18+
+- PostgreSQL
 
-git clone <your-repo-url>
-cd go-users-api
-2️⃣ Create PostgreSQL database
-sql
+### 1. Backend Setup
 
-CREATE DATABASE users_db;
-3️⃣ Create .env file
-Create a .env file in the project root:
+1.  **Clone the repository:**
+    ```bash
+    git clone <your-repo-url>
+    cd go-users-api
+    ```
 
-env
+2.  **Database Configuration:**
+    Create a `.env` file in the root directory:
+    ```env
+    DATABASE_URL=postgres://postgres:password@localhost:5432/users_db?sslmode=disable
+    ```
 
-DATABASE_URL=postgres://postgres:password@localhost:5432/users_db?sslmode=disable
-Update username, password, and database as per your setup.
+3.  **Run Migrations:**
+    Execute the SQL in `db/migrations/` to create the table.
 
-4️⃣ Run database migration
-Execute the migration SQL:
+4.  **Start the Server:**
+    ```bash
+    go mod tidy
+    go run cmd/server/main.go
+    ```
+    Server runs at `http://localhost:8080`
 
-sql
+### 2. Frontend Setup
 
-CREATE TABLE users (
-  id BIGSERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
-  dob DATE NOT NULL
-);
-(You can also use a migration tool if configured.)
+1.  **Navigate to frontend directory:**
+    ```bash
+    cd frontend
+    ```
 
-5️⃣ Run the application
+2.  **Install Dependencies:**
+    ```bash
+    npm install
+    ```
 
-go mod tidy
-go run ./cmd/server
-🌐 Server
-The server starts at:
-
-arduino
-
-http://localhost:8080
-🔗 API Endpoints
-➕ Create User
-POST /users
-
-json
-
-{
-  "name": "Alice",
-  "dob": "1990-05-10"
-}
-🔍 Get User by ID
-GET /users/{id}
-
-📄 List Users
-GET /users
-
-✏️ Update User
-PUT /users/{id}
-
-json
-
-{
-  "name": "Alice Updated",
-  "dob": "1991-03-15"
-}
-❌ Delete User
-DELETE /users/{id}
-
-📝 Notes
-Age is calculated dynamically and is not stored in the database
-
-SQLC is used for type-safe query generation
-
-Environment variables are used for configuration
-
-Clean separation of concerns across layers
-
-📌 Summary
-This project demonstrates a production-style Go backend with:
-
-Explicit dependency wiring
-
-SQL-first database access using SQLC
-
-Clean architecture principles
-
-Real-world REST API patterns
+3.  **Start Development Server:**
+    ```bash
+    npm run dev
+    ```
+    Frontend runs at `http://localhost:5173`
 
 ---
-```
-![alt text](image.png)
-![alt text](image-1.png)
-```
+
+## 🔗 API Endpoints
+
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/users` | List all users |
+| `GET` | `/users/:id` | Get user by ID |
+| `POST` | `/users` | Create new user |
+| `PUT` | `/users/:id` | Update user |
+| `DELETE` | `/users/:id` | Delete user |
+
+---
+
+## 📝 Usage
+
+1.  Open the frontend at `http://localhost:5173`.
+2.  Use the **Dashboard** to view quick stats.
+3.  Go to the **Users** page to add, edit, or remove users.
+4.  Toggle **Dark Mode** in the header to suit your preference.
+
+---

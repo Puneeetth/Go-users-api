@@ -16,6 +16,7 @@ import (
 	"log"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	swagger "github.com/gofiber/swagger"
 
 	_ "go-users-api/docs"
@@ -32,7 +33,13 @@ func main() {
 
 	app := fiber.New()
 
-	// ✅ THIS LINE WAS MISSING
+	// Enable CORS for frontend requests
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+		AllowMethods: "GET,POST,PUT,DELETE,OPTIONS",
+		AllowHeaders: "Origin, Content-Type, Accept",
+	}))
+
 	app.Get("/swagger/*", swagger.HandlerDefault)
 
 	routes.RegisterUserRoutes(app, userHandler)
