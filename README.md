@@ -2,8 +2,8 @@
 
 A full-stack application for managing users / calculating age, featuring a high-performance Go backend and a modern React + TypeScript frontend.
 
-![Dashboard](image.png)
-![Users List](image-1.png)
+![Dashboard](Welcome.png)
+![Users List](Add_Users.png)
 
 ---
 
